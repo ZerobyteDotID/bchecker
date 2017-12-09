@@ -1,2 +1,2 @@
-# biechk_r
+# bchecker
 Account Checker
